@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using EmpleadosCargos.Core;
 using EmpleadosCargos.DAL.EntityFramework;
+using System.Globalization;
 
 namespace EmpleadosCargos.WebMvc.Controllers
 {
@@ -36,6 +37,8 @@ namespace EmpleadosCargos.WebMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Cargar([Bind(Include = "EmpleadoID,Nombre,Apellido,FechaNacimiento,CargoId")] Empleado empleado)
         {
+            empleado.FechaNacimiento.ToString("d", new CultureInfo("es-ES"));
+
             if (ModelState.IsValid)
             {
                 db.Empleados.Add(empleado);
